@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [webdriver]" parallel="tests">
+  <test name="testff(failed)" parallel="tests">
+    <classes>
+      <class name="test.lesson1">
+        <methods>
+          <include name="test"/>
+        </methods>
+      </class> <!-- test.lesson1 -->
+    </classes>
+  </test> <!-- testff(failed) -->
+</suite> <!-- Failed suite [webdriver] -->

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="webdriver" parallel="tests" thread-count="5">
+  
+   <test name="testff">
+     <classes>
+     <class name="test.lesson1"> </class>
+     </classes>
+   </test>
+   
+  <test name="testie">
+     <classes>
+     <class name="test.IE"> </class>
+     </classes>
+  </test>
+  
+    <test name="testchrome">
+     <classes>
+     <class name="test.chromepro"> </class>
+     </classes>
+  </test>
+
+ 
+  
+</suite>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="webdrivertest" basedir="." default="run_tests"> 
+<property name="lib.dir" value="lib"/>
+<property name="src.dir" value="src"/>
+<property name="bin.dir" value="bin"/>
+<property name="test.dir" value="test"/>
+
+<path id="test.classpath">
+  <pathelement location="${bin.dir}"/>
+  <pathelement location ="."/>
+  <fileset dir="${lib.dir}" includes="*.jar"/>
+</path>
+
+<target name="clean">
+  <delete dir="${bin.dir}"/>
+</target>
+
+<target name="compile" depends="clean"> 
+  <mkdir dir ="${bin.dir}"/>
+  <javac srcdir="${src.dir}" encoding="UTF-8" destdir="${bin.dir}" classpathref="test.classpath" includeantruntime="off"/>
+</target>
+
+<taskdef name="testng" classname="com.beust.testng.TestNGAntTask" classpath="${lib.dir}/testng.jar"/>
+
+  <target name="run_tests" depends="compile"> 
+       <testng classpathref ="test.classpath" outputDir="test-output">
+         <xmlfileset dir="." includes="testng.xml"/>
+       </testng> 
+     <fail message="error: Test failed!!!!!" if="test.failed"/> 
+ </target>
+	
+	 <target name="send_email" depends="transform">
+	 	<mail mailhost="smtp.163.com" subject="testreport" mailport="25" user="kevin.r.zhang" password="198412101984">
+	 	  <from address="kevin.r.zhang@163.com"/>
+	 	  <to address="kevin.r.zhang@163.com"/>
+	 	  <message> Get Test Report </message> 
+	 	  <fileset dir="test-output">
+	 	     <include name ="index1.html"/>
+	 	  </fileset>
+	 	 </mail>
+	 </target>
+	
+	<target name="transform">
+      <xslt in="test-output/testng-results.xml" style="test/testng-results.xsl" out="test-output/index1.html">
+        <param name="testNgXslt.outputDir" expression="C:/8M/MyProj/webdrivertest/test-output"/>
+        <classpath refid="test.classpath"/>
+      </xslt> 
+	</target>
+
+</project>
